@@ -1,7 +1,7 @@
 # FingerVision用RTコンポーネント
 
 大阪電気通信大学  
-升谷 保博
+澤﨑 悠太，升谷 保博
 
 ## 概要
 - [FingerVision](http://akihikoy.net/p/fv.html)用の[ソフトウェア](https://github.com/akihikoy/fingervision)に含まれるROS用のノードをRTミドルウェアのコンポーネントとして移植したものです．
