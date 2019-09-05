@@ -17,6 +17,7 @@
   - OpenCV 2.4.13.6
   - Eigen 3.3.7
   - Boost 1.69
+- Ubuntu 16.04でもビルド・実行できることを簡単に確認しています．
 
 ## インストール（Windowsの場合）
 
@@ -39,6 +40,7 @@
 独自のデータ型とサービスポートのインタフェースを[idl/FingerVision.idl](idl/FingerVision.idl)で定義しています．
 
 ### 出力ポート
+各メンバの意味はオリジナルのトピックとほぼ同じです．`stamp`だけが，RTミドルウェアの慣習に従って`tm`に置き換えています．
 - blob_moves0 （データ型： FingerVision::BlobMoves）
 - prox_vision0 （データ型： FingerVision::ProxVision）
 - blob_moves1 （データ型： FingerVision::BlobMoves）
@@ -48,54 +50,59 @@
 
 - service
   - インタフェース名 coreService （型： FingerVision::CoreService）
-    - void pause();
-    - void resume();
-    - void set_frame_skip(in long num);
-    - void stop_detect_obj();
-    - void start_detect_obj();
-    - void clear_obj();
+    - void pause()
+      - 処理の一時停止
+    - void resume()
+      - 処理の再開
+    - void set_frame_skip(in long num)
+      - フレームスキップ数の設定
+    - void stop_detect_obj()
+      - 物体検知（近接視覚）を停止
+    - void start_detect_obj()
+      - 物体検知（近接視覚）を開始
+    - void clear_obj()
+      - 物体モデル（近接視覚）を消去
 
 ### コンフィギュレーション
-- cam_config
-  - 説明： 
+- pkg_dir
+  - 説明： 設定ファイルの親ディレクトリ（オリジナルでは，ROSのパッケージディレクトリのパス）
   - 型： string
-  - デフォルト値： 
+  - デフォルト値： .
+
+- cam_config
+  - 説明： カメラの設定ファイルのパス（pkg_dirに対する相対パス）
+  - 型： string
   - デフォルト値： config/cam1.yaml
 
 - blobtrack_config
-  - 説明： 
+  - 説明： マーカ追跡の設定ファイルのパス（pkg_dirに対する相対パス）
   - 型： string
   - デフォルト値： config/cam1.yaml
 
 - objdettrack_config
-  - 説明： 
+  - 説明： 近接視覚の設定ファイルのパス（pkg_dirに対する相対パス）
   - 型： string
   - デフォルト値： config/cam1.yaml
 
 - blob_calib_prefix
-  - 説明： 
+  - 説明： マーカ追跡の校正を保存するファイル名の先頭部分
   - 型： string
   - デフォルト値： blob_
 
 - vout_base
-  - 説明： 
+  - 説明： 動画を保存するファイル名の先頭部分
   - 型： string
   - デフォルト値： vout-
 
 - frame_skip
-  - 説明： 
+  - 説明： 1+frame_skip毎に動画像処理する（0ならばスキップなしで毎フレーム処理）
   - 型： int
   - デフォルト値： 0
 
 - target_fps
-  - 説明： 
+  - 説明： このFPSで動画像を処理する（0ならばFPS制御しない）
   - 型： double
   - デフォルト値： 0
-
-- pkg_dir
-  - 説明： 
-  - 型： string
-  - デフォルト値： .
 
 ## 使い方（Windowsの場合）
 
