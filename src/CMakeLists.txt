@@ -9,9 +9,8 @@ set(comp_srcs FingerVisionCore.cpp FingerVisionSVC_impl.cpp
 set(standalone_srcs FingerVisionCoreComp.cpp)
 
 #Boost
-set(BOOST_ALL_NO_LIB)
-set(boost_packages thread)
-find_package(Boost REQUIRED COMPONENTS ${boost_packages})
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost REQUIRED COMPONENTS thread)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
